@@ -8,7 +8,7 @@ class Game
   ]
 
   def initialize(word)
-    @letters = word.chars
+    @letters = word.upcase.chars
     @user_guesses = []
   end
 
@@ -17,9 +17,7 @@ class Game
   end
 
   def normalize_letter(letter)
-    replacement = EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) }
-    return [letter] unless replacement
-    replacement
+    EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || letter
   end
 
   def errors
@@ -35,9 +33,7 @@ class Game
   end
 
   def letters_to_guess
-    @letters.map do |letter|
-      letter if normalized_guesses.include?(letter)
-    end
+    @letters.map { |letter| letter if normalized_guesses.include?(letter) }
   end
 
   def lost?
