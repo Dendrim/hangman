@@ -1,11 +1,4 @@
-Console version of hangman game
-----------
->Target Ruby version: 3.1.2
-
->Works on windows 10, ubuntu 22.04.1
-
->Language: RU
-----------
+<h1>Console version of hangman game</h1>
 
 <h1>How to run</h1>
 
