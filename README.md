@@ -2,6 +2,7 @@
 
 
 <h1>Install required gems before launch with:</h1>
+
 ```
 bundle install
 ```
