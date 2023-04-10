@@ -13,12 +13,6 @@ bundle install
 bundle exec ruby main.rb
 ```
 
-<h1>How to run</h1>
-
-```
-ruby main.rb
-```
-
 <h1>How to add words</h1>
 
 1) Go to data/words.txt
