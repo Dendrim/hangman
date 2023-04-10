@@ -7,6 +7,18 @@ Console version of hangman game
 >Language: RU
 ----------
 
+
+<h1>Install required gems before launch with:</h1>
+```
+bundle install
+```
+
+<h1>How to run</h1>
+
+```
+bundle exec ruby main.rb
+```
+
 <h1>How to run</h1>
 
 ```
