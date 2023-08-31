@@ -2,6 +2,7 @@
 
 
 <h1>Install required gems before launch with:</h1>
+
 ```
 bundle install
 ```
@@ -28,7 +29,6 @@ ruby main.rb
 If your language has any groups of letters which considered equal and you want
 game to consider them as one letter, you can do so in `lib/game.rb`
 
-Add a new sub-array to an array `EQUAL_LETTERS`.
+Add a new sub-array to an initial array of `EQUAL_LETTERS`.
 
 Example: `%w[O Ö]`
-CASE SENSITIVE!!! All letters must be in upper case!!!

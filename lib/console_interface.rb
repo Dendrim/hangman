@@ -1,4 +1,5 @@
-require "colorize"
+require 'colorize'
+
 class ConsoleInterface
   FIGURES =
     Dir["#{__dir__}/../data/figures/*.txt"]

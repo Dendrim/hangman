@@ -1,27 +1,26 @@
 class Game
-
   TOTAL_ERRORS_ALLOWED = 7
   EQUAL_LETTERS = [
     %w[Е Ё],
-    %w[И Й],
-    %w[Ъ Ь]
-  ]
+    %w[и Й],
+    %w[Ъ ь]
+  ].map { |letters| letters.map(&:upcase) }
 
   def initialize(word)
     @letters = word.upcase.chars
     @user_guesses = []
   end
 
-  def normalized_guesses
-    @user_guesses.map { |letter| normalize_letter(letter) }.flatten
-  end
-
-  def normalize_letter(letter)
+  def equals_of_letter(letter)
     EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || letter
   end
 
+  def implied_guesses
+    @user_guesses.map { |letter| equals_of_letter(letter) }.flatten
+  end
+
   def errors
-    @user_guesses - @letters.map { |letter| normalize_letter(letter) }.flatten
+    @user_guesses - @letters.map { |letter| equals_of_letter(letter) }.flatten
   end
 
   def errors_made
@@ -33,7 +32,7 @@ class Game
   end
 
   def letters_to_guess
-    @letters.map { |letter| letter if normalized_guesses.include?(letter) }
+    @letters.map { |letter| letter if implied_guesses.include?(letter) }
   end
 
   def lost?
@@ -45,11 +44,11 @@ class Game
   end
 
   def play!(letter)
-    @user_guesses << letter if !over? && !normalized_guesses.include?(letter)
+    @user_guesses << letter if !over? && !implied_guesses.include?(letter)
   end
 
   def won?
-    (@letters - normalized_guesses).empty?
+    (@letters - implied_guesses).empty?
   end
 
   def word
