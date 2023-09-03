@@ -4,7 +4,7 @@ class Game
     %w[Е Ё],
     %w[и Й],
     %w[Ъ ь]
-  ].map { |letters| letters.map(&:upcase) }
+  ].map { |letters| letters.map { |letter| letter.upcase } }
 
   def initialize(word)
     @letters = word.upcase.chars
@@ -12,15 +12,15 @@ class Game
   end
 
   def equals_of_letter(letter)
-    EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || letter
+    EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || [letter]
   end
 
   def implied_guesses
-    @user_guesses.map { |letter| equals_of_letter(letter) }.flatten
+    @user_guesses.flat_map { |letter| equals_of_letter(letter) }
   end
 
   def errors
-    @user_guesses - @letters.map { |letter| equals_of_letter(letter) }.flatten
+    @user_guesses - @letters.flat_map { |letter| equals_of_letter(letter) }
   end
 
   def errors_made
