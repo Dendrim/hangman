@@ -1,7 +1,7 @@
 class Game
   TOTAL_ERRORS_ALLOWED = 7
   EQUAL_LETTERS = [
-    %w[Е Ё],
+    %w[Е Ё Ë],
     %w[и Й],
     %w[Ъ ь]
   ].map { |letters| letters.map { |letter| letter.upcase } }
@@ -9,14 +9,6 @@ class Game
   def initialize(word)
     @letters = word.upcase.chars
     @user_guesses = []
-  end
-
-  def equals_of_letter(letter)
-    EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || [letter]
-  end
-
-  def implied_guesses
-    @user_guesses.flat_map { |letter| equals_of_letter(letter) }
   end
 
   def errors
@@ -53,5 +45,15 @@ class Game
 
   def word
     @letters.join
+  end
+
+  private
+
+  def equals_of_letter(letter)
+    EQUAL_LETTERS.find { |equal_list| equal_list.include?(letter) } || [letter]
+  end
+
+  def implied_guesses
+    @user_guesses.flat_map { |letter| equals_of_letter(letter) }
   end
 end
